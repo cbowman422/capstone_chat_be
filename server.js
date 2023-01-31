@@ -51,11 +51,11 @@ app.use('/chat', chatController);
 const { Server } = require("socket.io");
 const io = new Server(http, {
     cors: {
-        origin: "https://capstone-chat.netlify.app"
+        origin: "http://localhost:3000"
     }
   });
  // http://localhost:3000
-
+ // https://capstone-chat.netlify.app
 
 //Add this before the app.get() block
 // on the sever instance bind to socket 'connection' event and provide socket as argument 
