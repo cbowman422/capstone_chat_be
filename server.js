@@ -23,12 +23,12 @@ require('dotenv').config()
 // imports mongo database connection file that uses mongoose for connection events
 require('./config/db.connection')
 
-// TODO --------
+// TODO -------- Change Streams ----
 // runs PORT through .env file
 const { PORT } = process.env
 const { MongoClient } = require("mongodb");
 const client = new MongoClient(process.env.MONGODB_URI);
-// TODO --------
+// TODO -------- Change Streams -----
 
 // express, cors, morgan
 //app. use() function is used to mount the specified middleware function ( the functions that have access to the request object and response object, or we can call it a response-request cycle) at the path which is being specified.
@@ -63,19 +63,14 @@ const io = new Server(http, {
 io.on('connection', (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
 
-//  // socket binds on to message event and provides data from message client
-//  // socket fires message response returning un altered data
-//  socket.on('message', (data) => {
-//   console.log(data);
-//   io.emit('messageResponse', data);
-//   });
 
+ // socket binds on to message event and provides data from message client
+ // socket fires message response returning un altered data
+ socket.on('message', (data) => {
+  console.log(data);
+  io.emit('messageResponseSocket', data);
+  });
 
-//   // socket binds on pre built in socket 'disconnect' event and provides console messaage when user disconnects
-//   socket.on('disconnect', () => {
-//     console.log('🔥: A user disconnected');
-//   });
-// });
 
 
   // socket binds on pre built in socket 'disconnect' event and provides console messaage when user disconnects
