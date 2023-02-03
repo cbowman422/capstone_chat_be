@@ -82,6 +82,8 @@ io.on('connection', (socket) => {
 // Change streams
 async function run() {
   try {
+    
+    //TODO ----- this is for messgaes
     await client.connect();
     const database = client.db('test');
     const messages = database.collection('chats');
@@ -102,10 +104,29 @@ async function run() {
           io.emit('messageResponse', next.fullDocument);
           console.log(next.fullDocument);
           break;
-      
-          
-      }
+      } 
         });
+       
+        // TODO ----- this is for profiles
+        const databaseProfile = client.db('test');
+        const profiles = databaseProfile.collection('profiles');
+        // open a Change Stream on the "messages" collection
+        changeStreamProfiles = profiles.watch();
+        changeStreamProfiles.on("change", next => {
+          // process any change event
+          switch (next.operationType) {
+            case 'insert':
+              io.emit('messageResponseProfile', next.fullDocument);
+              console.log(next.fullDocument.textChat);
+              break;
+            case 'delete':
+              io.emit('messageResponseProfile', next.fullDocument);
+              console.log(next.fullDocument);
+              break;
+          } 
+            });
+
+
   } catch {
     // Ensures that the client will close when you error
     await client.close();
