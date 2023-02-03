@@ -51,7 +51,7 @@ app.use('/chat', chatController);
 const { Server } = require("socket.io");
 const io = new Server(http, {
     cors: {
-        origin: "http://localhost:3000"
+        origin: "https://capstone-chat.netlify.app"
     }
   });
  // http://localhost:3000
@@ -82,7 +82,7 @@ io.on('connection', (socket) => {
 // Change streams
 async function run() {
   try {
-    
+
     //TODO ----- this is for messgaes
     await client.connect();
     const database = client.db('test');
