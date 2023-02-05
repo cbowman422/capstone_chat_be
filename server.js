@@ -57,6 +57,7 @@ const io = new Server(http, {
  // http://localhost:3000
  // https://capstone-chat.netlify.app
  // https://milliesmessenger.netlify.app
+ // https://milliesmessenger.netlify.app
 
 //Add this before the app.get() block
 // on the sever instance bind to socket 'connection' event and provide socket as argument 
