@@ -51,7 +51,7 @@ app.use('/chat', chatController);
 const { Server } = require("socket.io");
 const io = new Server(http, {
     cors: {
-        origin: "https://milliesmessenger.netlify.app"
+        origin: "http://localhost:3000"
     }
   });
  // http://localhost:3000
